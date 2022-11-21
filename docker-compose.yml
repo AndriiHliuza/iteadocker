@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  mysql-db:
+    container_name: mysqldb
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      # Не обов'язково використовувати root, але ви можете, якщо хочете
+      MYSQL_USER: 'user'
+      # Ви можете використовувати будь-який пароль
+      MYSQL_PASSWORD: 'password'
+      # root користувач
+      MYSQL_ROOT_USER: 'root'
+      # Пароль для root-доступу
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Відкритий порт> : <Порт MySQL, що працює всередині контейнера>
+      - '3308:3306'
+    expose:
+      # Відкриває порт 3306 на контейнері
+      - '3308'
+      # Де будуть зберігатися наші дані
+    volumes:
+      - my-db:/var/lib/mysql
+
+# Names our volume
+volumes:
+  my-db:
